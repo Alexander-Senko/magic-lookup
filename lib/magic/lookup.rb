@@ -6,6 +6,8 @@ require 'memery'
 
 module Magic
 	module Lookup
+		autoload :Error, 'magic/lookup/error'
+
 		include Memery
 
 		memoize def for object_class

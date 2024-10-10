@@ -1,11 +1,22 @@
-name: Ruby
+name: CI
 
 on:
   push:
     branches:
       - main
+    tags:
+      - '!*' # none
+    paths:
+      - lib/*
+      - spec/*
+      - Gemfile*
+      - '*.gemspec'
+      - .github/workflows/main.yml
 
   pull_request:
+    paths:
+      - '!*.md'
+      - '!*.txt'
 
 jobs:
   build:

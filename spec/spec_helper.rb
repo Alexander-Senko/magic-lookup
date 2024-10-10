@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
 require 'rspec/its'
+require 'simplecov'
+
+SimpleCov.start do
+	add_filter '/spec/'
+end
 
 require 'magic/lookup'
 

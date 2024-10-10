@@ -10,6 +10,8 @@ gem 'rake'
 group :test do
 	gem 'rspec'
 	gem 'rspec-its'
+
+	gem 'simplecov', require: false
 end
 
 group :development do

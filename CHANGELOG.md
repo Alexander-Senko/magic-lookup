@@ -1,5 +1,7 @@
-## [Unreleased]
+## [0.1.0] — 2024-10-10
 
-## [0.1.0] - 2024-10-07
+### Added
 
-- Initial release
+- `Magic::Lookup#for` for name-based class lookups.
+- `Magic::Lookup::Error` to be used when lookup fails.
+- `Magic::Lookup::Error.for` factory helper.

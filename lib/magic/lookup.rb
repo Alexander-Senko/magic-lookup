@@ -6,7 +6,8 @@ require 'memery'
 
 module Magic
 	module Lookup
-		autoload :Error, 'magic/lookup/error'
+		autoload :Error,      'magic/lookup/error'
+		autoload :Namespaces, 'magic/lookup/namespaces'
 
 		include Memery
 
@@ -24,6 +25,8 @@ module Magic
 					end
 					.first
 		end
+
+		prepend Namespaces
 
 		def name_for(object_class) = raise NotImplementedError
 

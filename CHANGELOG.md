@@ -3,6 +3,7 @@
 ### Added
 
 - Optional `namespace` parameter to `Magic::Lookup#for` for class lookups within a namespace.
+- `Magic::Lookup#namespaces` to set default lookup namespaces.
 
 
 ## [0.1.0] — 2024-10-10

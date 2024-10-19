@@ -85,6 +85,13 @@ Scope.for MyModel              # => MyScope
 Scope.for MyModel, MyNamespace # => MyNamespace::MyScope
 ```
 
+Multiple default lookup namespaces may be set for the base class:
+
+```ruby
+Scope.namespaces << MyNamespace # => [nil, MyNamespace]
+Scope.for MyModel               # => MyNamespace::MyScope
+```
+
 > [!TIP]
 > Until a comprehensive documentation on all the use cases is released, the spec is recommended as further reading.
 > One can access it by running `rake` in the gem directory.

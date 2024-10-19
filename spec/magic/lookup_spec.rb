@@ -73,9 +73,35 @@ module Magic
 			end
 
 			describe 'namespaces' do
+				before { stub_const            'ArrayScope', Class.new(base_class) }
 				before { stub_const 'Namespace::ArrayScope', Class.new(base_class) }
 
 				its([Array, 'Namespace']) { is_expected.to be Namespace::ArrayScope }
+
+				context 'when set for the base class' do
+					before { base_class.namespaces << Namespace }
+
+					its([Array     ]) { is_expected.to be Namespace::ArrayScope }
+					its([Array, nil]) { is_expected.to be            ArrayScope }
+
+					it 'isn’t cached' do
+						expect(subject[Array]).to be Namespace::ArrayScope
+						base_class.namespaces.delete Namespace
+						expect(subject[Array]).to be            ArrayScope
+					end
+
+					context 'without matching decorators in the namespace' do
+						before { base_class.namespaces = [ 'OtherNamespace' ] }
+
+						its([Array]) { is_expected.to be_nil }
+
+						context 'with a fallback' do
+							before { base_class.namespaces = [ nil, 'OtherNamespace' ] }
+
+							its([Array]) { is_expected.to be ArrayScope }
+						end
+					end
+				end
 
 				context 'when target class is namespaced' do
 					context 'when matching class is of the same namespace' do

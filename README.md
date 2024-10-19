@@ -68,7 +68,7 @@ scope_class = Scope.for(object.class) or
 
 `Magic::Lookup::Error` is never raised internally and is meant to be used in your code that implements the lookup logic.
 
-## Features
+## 🔮 Magic
 
 ### Inheritance
 

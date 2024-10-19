@@ -20,9 +20,9 @@ Moreover, inconsistencies across these implementations lead to misunderstanding 
 
 So, meet
 
-# 🔮 Magic Lookup
+# 🔮 Magic Lookup
 
-It’s meant to be The One to Rule Them All — the library to provide a generic name-based lookup for a plenty of cases.
+It’s meant to be _The One to Rule Them All_ — the library to provide a generic name-based lookup for a plenty of cases.
 
 ## Installation
 
@@ -69,9 +69,10 @@ scope_class = Scope.for(object.class) or
     raise Magic::Lookup::Error.for(object, Scope)
 ```
 
-`Magic::Lookup::Error` is never raised internally and is meant to be used in your code that implements the lookup logic.
+> [!NOTE]
+> `Magic::Lookup::Error` is never raised internally and is meant to be used in your code that implements the lookup logic.
 
-## 🔮 Magic
+## 🔮 Magic
 
 ### Inheritance
 

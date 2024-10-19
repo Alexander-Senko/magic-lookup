@@ -73,6 +73,10 @@ module Magic
 			end
 
 			describe 'namespaces' do
+				before { stub_const 'Namespace::ArrayScope', Class.new(base_class) }
+
+				its([Array, 'Namespace']) { is_expected.to be Namespace::ArrayScope }
+
 				context 'when target class is namespaced' do
 					context 'when matching class is of the same namespace' do
 						before { stub_const 'Enumerator::LazyScope', Class.new(base_class) }

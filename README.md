@@ -78,6 +78,13 @@ Lookup is provided not only for the class itself, but to any of its ancestors as
 
 Both of matching classes — the target and its match — may be namespaced independently.
 
+One can specify a namespace to look in:
+
+```ruby
+Scope.for MyModel              # => MyScope
+Scope.for MyModel, MyNamespace # => MyNamespace::MyScope
+```
+
 > [!TIP]
 > Until a comprehensive documentation on all the use cases is released, the spec is recommended as further reading.
 > One can access it by running `rake` in the gem directory.

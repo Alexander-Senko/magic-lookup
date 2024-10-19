@@ -3,7 +3,7 @@ module Magic
 		VERSION: String
 		AUTHORS: Array[Gem::Author]
 
-		def for: (Class) -> Class?
+		def for: (Class, ?(Module | interned) namespace) -> Class?
 
 		def name_for: (Module) -> String
 

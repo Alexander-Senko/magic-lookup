@@ -10,7 +10,7 @@ module Magic
 
 		include Memery
 
-		memoize def for object_class
+		memoize def for object_class, namespace = nil
 			descendants = self.descendants # cache
 					.reverse # most specific first
 
@@ -18,6 +18,7 @@ module Magic
 					.lazy # optimization
 					.filter(&:name)
 					.map { name_for _1 }
+					.map { [ *namespace, _1 ] * '::' }
 					.filter_map do |class_name|
 						descendants.find { _1.name == class_name }
 					end

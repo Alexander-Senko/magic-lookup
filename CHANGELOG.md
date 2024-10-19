@@ -1,3 +1,10 @@
+## [0.2.0] — UNRELEASED
+
+### Added
+
+- Optional `namespace` parameter to `Magic::Lookup#for` for class lookups within a namespace.
+
+
 ## [0.1.0] — 2024-10-10
 
 ### Added

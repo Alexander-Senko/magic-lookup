@@ -97,6 +97,14 @@ Scope.for MyModel               # => MyNamespace::MyScope
 > One can access it by running `rake` in the gem directory.
 > The output is quite descriptive to get familiar with the use cases.
 
+## Known issues
+
+### https://github.com/Alexander-Senko/magic-lookup/issues/1
+
+> [!IMPORTANT]
+> Magic Lookup doesn’t try to autoload any classes, it searches among already loaded ones instead.
+> Thus, one should preload all classes that need to be accessible via the lookup.
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.

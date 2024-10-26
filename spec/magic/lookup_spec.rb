@@ -28,11 +28,11 @@ module Magic
 				it { expect { subject[Array] }.to raise_error NotImplementedError }
 			end
 
-			context 'without decorators defined' do
+			context 'without scopes defined' do
 				its([Array]) { is_expected.to be_nil }
 			end
 
-			context 'without matching decorators defined' do
+			context 'without matching scopes defined' do
 				before { stub_const 'ArrayDecorator', Class.new(base_class) }
 
 				its([Array]) { is_expected.to be_nil }
@@ -44,7 +44,7 @@ module Magic
 				its([Array]) { is_expected.to be_nil }
 			end
 
-			context 'with a matching decorator' do
+			context 'with a matching scope' do
 				before { stub_const 'ArrayScope', Class.new(base_class) }
 
 				its([Array]) { is_expected.to be ArrayScope }
@@ -90,7 +90,7 @@ module Magic
 						expect(subject[Array]).to be            ArrayScope
 					end
 
-					context 'without matching decorators in the namespace' do
+					context 'without matching scopes in the namespace' do
 						before { base_class.namespaces = [ 'OtherNamespace' ] }
 
 						its([Array]) { is_expected.to be_nil }

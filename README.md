@@ -1,3 +1,6 @@
+![GitHub Actions Workflow Status](
+	https://img.shields.io/github/actions/workflow/status/Alexander-Senko/magic-lookup/ci.yml
+)
 ![Code Climate maintainability](
 	https://img.shields.io/codeclimate/maintainability-percentage/Alexander-Senko/magic-lookup
 )

@@ -6,7 +6,5 @@ module Magic
 		def for: (Class, ?(Module | interned) namespace) -> Class?
 
 		def name_for: (Module) -> String
-
-		def descendants: -> Array[Class]
 	end
 end

@@ -1,3 +1,10 @@
+## [0.3.0] — UNRELEASED
+
+### Added
+
+- `Magic::Lookup#for` to consider `self` a part of a lookup scope.
+
+
 ## [0.2.0] — 2024-10-19
 
 ### Added

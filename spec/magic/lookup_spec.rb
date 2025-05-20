@@ -48,6 +48,12 @@ module Magic
 				before { stub_const 'ArrayScope', Class.new(base_class) }
 
 				its_result(Array) { is_expected.to be ArrayScope }
+
+				context 'when matching with itself' do
+					subject { ArrayScope }
+
+					its_result(Array) { is_expected.to be ArrayScope }
+				end
 			end
 
 			describe 'inheritance' do

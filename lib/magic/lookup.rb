@@ -13,6 +13,7 @@ module Magic
 
 		memoize def for object_class, namespace = nil
 			descendants = self.descendants # cache
+					.union([ self ]) # including self
 					.reverse # most specific first
 
 			object_class.ancestors

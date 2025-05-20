@@ -2,7 +2,7 @@
 
 module Magic
 	module Lookup
-		module Namespaces
+		module Namespaces # :nodoc:
 			attr_writer :namespaces
 
 			def namespaces = @namespaces ||= [ nil ]

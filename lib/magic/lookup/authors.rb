@@ -9,8 +9,8 @@ Gem::Author ||= Struct.new(
 end
 
 module Magic
-	module Lookup
-		AUTHORS = [
+	module Lookup # :nodoc:
+		AUTHORS = [ # rubocop:disable Style/MutableConstant
 				Gem::Author.new(
 						name:   'Alexander Senko',
 						email:  'Alexander.Senko@gmail.com',

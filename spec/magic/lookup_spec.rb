@@ -1,5 +1,13 @@
 # frozen_string_literal: true
 
+# Enhanced table view for expressions
+#
+# rubocop:disable Layout/SpaceBeforeFirstArg
+#
+# Enhanced nested method chains
+#
+# rubocop:disable Layout/MultilineMethodCallIndentation
+
 module Magic
 	RSpec.describe Lookup do
 		subject { base_class }
@@ -15,11 +23,18 @@ module Magic
 		end
 
 		describe '.for' do
-			it 'passes `Module`s to `.name_for`' do
-				expect(base_class).to receive(:name_for).with(kind_of Module)
-						.and_call_original.at_least(1).time
+			before do
+				allow(base_class).to receive(:name_for)
+						.with(kind_of Module)
+						.and_call_original
+			end
 
+			it 'passes `Module`s to `.name_for`' do
 				subject[Array]
+
+				expect(base_class).to have_received(:name_for)
+						.with(kind_of Module)
+						.at_least(1).time
 			end
 
 			context 'without `.name_for` explicitly defined' do
@@ -91,9 +106,10 @@ module Magic
 					its_result(Array, nil) { is_expected.to be            ArrayScope }
 
 					it 'isn’t cached' do
-						expect(subject[Array]).to be Namespace::ArrayScope
-						base_class.namespaces.delete Namespace
-						expect(subject[Array]).to be            ArrayScope
+						expect { base_class.namespaces.delete Namespace }
+								.to change { subject[Array] }
+										.from(Namespace::ArrayScope)
+										.to              ArrayScope
 					end
 
 					context 'without matching scopes in the namespace' do

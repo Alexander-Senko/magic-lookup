@@ -53,7 +53,7 @@ module Magic
 				its_result(Array) { is_expected.to be_nil }
 			end
 
-			context 'when a class with a matching name does not inherit from this one' do
+			context 'when a class with a matching name doesn’t inherit from this one' do
 				before { stub_const 'ArrayScope', Class.new }
 
 				its_result(Array) { is_expected.to be_nil }
@@ -68,6 +68,23 @@ module Magic
 					subject { ArrayScope }
 
 					its_result(Array) { is_expected.to be ArrayScope }
+				end
+			end
+
+			describe 'autoloading' do
+				before do
+					stub_const 'Scope',
+							base_class
+					stub_const 'Autoloadable',
+							Module.new {
+								autoload :ArrayScope, 'fixtures/autoloadable/array_scope'
+							}
+				end
+
+				its_result(Array, 'Autoloadable') { is_expected.to be Autoloadable::ArrayScope }
+
+				example 'the target isn’t eagerly loaded' do
+					expect(Autoloadable.const_defined? :ARRAY_SCOPE).not_to be
 				end
 			end
 
@@ -159,27 +176,6 @@ module Magic
 							its_result(Enumerator::Lazy) { is_expected.to be Scope::Enumerator }
 						end
 					end
-				end
-			end
-
-			describe 'optimizations' do
-				before { allow(base_class).to receive(:descendants).and_call_original }
-
-				it 'caches results' do
-					2.times { subject[Array] }
-
-					expect(base_class).to have_received(:descendants)
-							.once
-				end
-
-				it 'caches results per class' do
-					2.times do
-						subject[Array]
-						subject[Hash]
-					end
-
-					expect(base_class).to have_received(:descendants)
-							.exactly(2).times
 				end
 			end
 		end

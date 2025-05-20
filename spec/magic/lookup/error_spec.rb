@@ -9,16 +9,16 @@ end
 module Magic
 	module Lookup
 		RSpec.describe Error do
-			describe '.for', :method do
-				its([[], Scope]) do
+			describe '.for' do
+				its_result [], Scope do
 					is_expected.to be_instance_of described_class
 				end
 
-				its([[], Scope]) do
+				its_result [], Scope do
 					is_expected.to be_a StandardError
 				end
 
-				its([[], Scope]) do
+				its_result [], Scope do
 					is_expected.to have_attributes to_s: /no Scope found/,
 							name: 'ArrayScope', receiver: []
 				end

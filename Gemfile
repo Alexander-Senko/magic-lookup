@@ -10,6 +10,7 @@ gem 'rake'
 group :test do
 	gem 'rspec'
 	gem 'rspec-its'
+	gem 'magic-support'
 
 	gem 'simplecov', require: false
 end

@@ -14,7 +14,7 @@ module Magic
 			end
 		end
 
-		describe '.for', :method do
+		describe '.for' do
 			it 'passes `Module`s to `.name_for`' do
 				expect(base_class).to receive(:name_for).with(kind_of Module)
 						.and_call_original.at_least(1).time
@@ -29,31 +29,31 @@ module Magic
 			end
 
 			context 'without scopes defined' do
-				its([Array]) { is_expected.to be_nil }
+				its_result(Array) { is_expected.to be_nil }
 			end
 
 			context 'without matching scopes defined' do
 				before { stub_const 'ArrayDecorator', Class.new(base_class) }
 
-				its([Array]) { is_expected.to be_nil }
+				its_result(Array) { is_expected.to be_nil }
 			end
 
 			context 'when a class with a matching name does not inherit from this one' do
 				before { stub_const 'ArrayScope', Class.new }
 
-				its([Array]) { is_expected.to be_nil }
+				its_result(Array) { is_expected.to be_nil }
 			end
 
 			context 'with a matching scope' do
 				before { stub_const 'ArrayScope', Class.new(base_class) }
 
-				its([Array]) { is_expected.to be ArrayScope }
+				its_result(Array) { is_expected.to be ArrayScope }
 			end
 
 			describe 'inheritance' do
 				before { stub_const 'EnumerableScope', Class.new(base_class) }
 
-				its([Array]) { is_expected.to be EnumerableScope }
+				its_result(Array) { is_expected.to be EnumerableScope }
 
 				context 'with several matches' do
 					before { stub_const 'ArrayScope', Class.new(parent_class) }
@@ -61,13 +61,13 @@ module Magic
 					context 'when siblings' do
 						let(:parent_class) { base_class }
 
-						its([Array]) { is_expected.to be ArrayScope }
+						its_result(Array) { is_expected.to be ArrayScope }
 					end
 
 					context 'when inherited' do
 						let(:parent_class) { EnumerableScope }
 
-						its([Array]) { is_expected.to be ArrayScope }
+						its_result(Array) { is_expected.to be ArrayScope }
 					end
 				end
 			end
@@ -76,13 +76,13 @@ module Magic
 				before { stub_const            'ArrayScope', Class.new(base_class) }
 				before { stub_const 'Namespace::ArrayScope', Class.new(base_class) }
 
-				its([Array, 'Namespace']) { is_expected.to be Namespace::ArrayScope }
+				its_result(Array, 'Namespace') { is_expected.to be Namespace::ArrayScope }
 
 				context 'when set for the base class' do
 					before { base_class.namespaces << Namespace }
 
-					its([Array     ]) { is_expected.to be Namespace::ArrayScope }
-					its([Array, nil]) { is_expected.to be            ArrayScope }
+					its_result(Array)      { is_expected.to be Namespace::ArrayScope }
+					its_result(Array, nil) { is_expected.to be            ArrayScope }
 
 					it 'isn’t cached' do
 						expect(subject[Array]).to be Namespace::ArrayScope
@@ -93,12 +93,12 @@ module Magic
 					context 'without matching scopes in the namespace' do
 						before { base_class.namespaces = [ 'OtherNamespace' ] }
 
-						its([Array]) { is_expected.to be_nil }
+						its_result(Array) { is_expected.to be_nil }
 
 						context 'with a fallback' do
 							before { base_class.namespaces = [ nil, 'OtherNamespace' ] }
 
-							its([Array]) { is_expected.to be ArrayScope }
+							its_result(Array) { is_expected.to be ArrayScope }
 						end
 					end
 				end
@@ -107,13 +107,13 @@ module Magic
 					context 'when matching class is of the same namespace' do
 						before { stub_const 'Enumerator::LazyScope', Class.new(base_class) }
 
-						its([Enumerator::Lazy]) { is_expected.to be Enumerator::LazyScope }
+						its_result(Enumerator::Lazy) { is_expected.to be Enumerator::LazyScope }
 					end
 
 					context 'when matching class is of another namespace' do
 						before { stub_const 'EnumeratorScope', Class.new(base_class) }
 
-						its([Enumerator::Lazy]) { is_expected.to be EnumeratorScope }
+						its_result(Enumerator::Lazy) { is_expected.to be EnumeratorScope }
 					end
 				end
 
@@ -122,19 +122,19 @@ module Magic
 
 					before { stub_const 'Scope::Array', Class.new(base_class) }
 
-					its([Array]) { is_expected.to be Scope::Array }
+					its_result(Array) { is_expected.to be Scope::Array }
 
 					context 'when target class is namespaced' do
 						context 'when matching class is of the same namespace' do
 							before { stub_const 'Scope::Enumerator::Lazy', Class.new(base_class) }
 
-							its([Enumerator::Lazy]) { is_expected.to be Scope::Enumerator::Lazy }
+							its_result(Enumerator::Lazy) { is_expected.to be Scope::Enumerator::Lazy }
 						end
 
 						context 'when matching class is of another namespace' do
 							before { stub_const 'Scope::Enumerator', Class.new(base_class) }
 
-							its([Enumerator::Lazy]) { is_expected.to be Scope::Enumerator }
+							its_result(Enumerator::Lazy) { is_expected.to be Scope::Enumerator }
 						end
 					end
 				end

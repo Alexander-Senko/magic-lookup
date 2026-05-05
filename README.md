@@ -1,11 +1,15 @@
 ![GitHub Actions Workflow Status](
 	https://img.shields.io/github/actions/workflow/status/Alexander-Senko/magic-lookup/ci.yml
 )
-![Code Climate maintainability](
-	https://img.shields.io/codeclimate/maintainability-percentage/Alexander-Senko/magic-lookup
+[![Maintainability](
+	https://qlty.sh/gh/Alexander-Senko/projects/magic-lookup/maintainability.svg
+)](
+	https://qlty.sh/gh/Alexander-Senko/projects/magic-lookup
 )
-![Code Climate coverage](
-	https://img.shields.io/codeclimate/coverage/Alexander-Senko/magic-lookup
+[![Code Coverage](
+	https://qlty.sh/gh/Alexander-Senko/projects/magic-lookup/coverage.svg
+)](
+	https://qlty.sh/gh/Alexander-Senko/projects/magic-lookup
 )
 
 ## What is it for?

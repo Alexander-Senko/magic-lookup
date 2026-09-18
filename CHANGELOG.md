@@ -2,6 +2,10 @@
 
 This release marks the gem to be stable enough.
 
+### Changed
+
+- Moved to Ruby 3.4+.
+
 ### Added
 
 - `Magic::Lookup#for` to respect autoloadable lookup classes.

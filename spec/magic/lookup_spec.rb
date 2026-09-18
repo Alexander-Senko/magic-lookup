@@ -38,7 +38,7 @@ module Magic
 			end
 
 			context 'without `.name_for` explicitly defined' do
-				let(:base_class) { Class.new.tap { _1.extend described_class } }
+				let(:base_class) { Class.new.tap { it.extend described_class } }
 
 				it { expect { subject[Array] }.to raise_error NotImplementedError }
 			end

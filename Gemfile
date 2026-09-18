@@ -21,4 +21,5 @@ group :development do
 	gem 'rubocop-rake',  require: false
 
 	gem 'rbs'
+	gem 'irb'
 end

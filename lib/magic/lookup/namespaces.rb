@@ -13,7 +13,7 @@ module Magic
 				self.namespaces
 						.reverse # recently added first
 						.lazy    # optimization
-						.filter_map { super object_class, _1 }
+						.filter_map { super object_class, it }
 						.first
 			end
 		end

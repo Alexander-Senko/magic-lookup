@@ -42,8 +42,8 @@ module Magic
 			object_class.ancestors
 					.lazy # optimization
 					.filter(&:name)
-					.map { name_for _1 }
-					.map { [ *namespace, _1 ] * '::' }
+					.map { name_for it }
+					.map { [ *namespace, it ] * '::' }
 					.filter_map(&:safe_constantize)
 					.grep(..self)
 					.first

@@ -4,10 +4,6 @@ require 'rspec/its'
 require 'rspec/method'
 require 'simplecov'
 
-SimpleCov.start do
-	add_filter '/spec/'
-end
-
 require 'magic/lookup'
 
 RSpec.configure do |config|
@@ -21,3 +17,5 @@ RSpec.configure do |config|
 		c.syntax = :expect
 	end
 end
+
+SimpleCov.start

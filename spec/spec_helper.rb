@@ -4,9 +4,7 @@ require 'rspec/its'
 require 'rspec/method'
 require 'simplecov'
 
-SimpleCov.start do
-	add_filter '/spec/'
-end
+SimpleCov.start
 
 require 'magic/lookup'
 

@@ -11,6 +11,7 @@ group :test do
 	gem 'rspec'
 	gem 'rspec-its'
 	gem 'magic-support'
+	gem 'combustion'
 
 	gem 'simplecov', require: false
 end

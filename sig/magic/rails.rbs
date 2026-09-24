@@ -1,0 +1,3 @@
+module Magic
+	def self.eager_load: (*interned scopes, ?engine: Rails::Engine) -> Array[Pathname]?
+end

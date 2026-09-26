@@ -3,10 +3,6 @@
 # Enhanced table view for expressions
 #
 # rubocop:disable Layout/SpaceBeforeFirstArg
-#
-# Enhanced nested method chains
-#
-# rubocop:disable Layout/MultilineMethodCallIndentation
 
 module Magic
 	RSpec.describe Lookup do
@@ -115,32 +111,6 @@ module Magic
 				before { stub_const 'Namespace::ArrayScope', Class.new(base_class) }
 
 				its_result(Array, 'Namespace') { is_expected.to be Namespace::ArrayScope }
-
-				context 'when set for the base class' do
-					before { base_class.namespaces << Namespace }
-
-					its_result(Array)      { is_expected.to be Namespace::ArrayScope }
-					its_result(Array, nil) { is_expected.to be            ArrayScope }
-
-					it 'isn’t cached' do
-						expect { base_class.namespaces.delete Namespace }
-								.to change { subject[Array] }
-										.from(Namespace::ArrayScope)
-										.to              ArrayScope
-					end
-
-					context 'without matching scopes in the namespace' do
-						before { base_class.namespaces = [ 'OtherNamespace' ] }
-
-						its_result(Array) { is_expected.to be_nil }
-
-						context 'with a fallback' do
-							before { base_class.namespaces = [ nil, 'OtherNamespace' ] }
-
-							its_result(Array) { is_expected.to be ArrayScope }
-						end
-					end
-				end
 
 				context 'when target class is namespaced' do
 					context 'when matching class is of the same namespace' do

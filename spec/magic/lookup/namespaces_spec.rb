@@ -19,6 +19,18 @@ module Magic
 
 			it { is_expected.to be { it < described_class } }
 
+			describe Error do
+				subject { described_class }
+
+				describe '.for' do
+					context 'with configured namespaces' do
+						its_result [], NamespacedScope do
+							is_expected.to have_attributes to_s: /default name is Namespace::ArrayScope/
+						end
+					end
+				end
+			end
+
 			describe '.namespaces' do
 				subject { stub_const 'ArrayScope', Class.new(base_class) }
 

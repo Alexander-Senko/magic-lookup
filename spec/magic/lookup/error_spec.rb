@@ -18,6 +18,10 @@ module Magic
 					is_expected.to have_attributes to_s: /no DummyScope found/,
 							name: 'ArrayScope', receiver: []
 				end
+
+				its_result [], DummyScope do
+					is_expected.to have_attributes to_s: /default name is ArrayScope/
+				end
 			end
 		end
 	end

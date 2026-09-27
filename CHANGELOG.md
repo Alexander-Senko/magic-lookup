@@ -9,12 +9,14 @@ This release marks the gem to be stable enough.
 ### Added
 
 - `Magic::Lookup#for` to respect autoloadable lookup classes.
+- `Magic::Lookup#namespaced_name_for`.
 - Rails support (optional, not a dependency):
   - Ported `Magic.eager_load` from Magic Presenter to eagerly load different class scopes, be them presenters, models or whatever else.
 
 ### Fixed
 
 - A class with no namespaces configured should respect those of its ancestors.
+- Lookup error messages should suggest namespaced names if no empty namespace is configured.
 
 
 ## [0.3.1] — 2026-05-05

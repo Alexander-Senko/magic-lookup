@@ -1,0 +1,10 @@
+module Magic
+	module Lookup
+		module Namespaces
+			def namespaces: -> Array[namespace]
+
+			def                 for: (Module, ?namespace) -> Class?
+			def namespaced_name_for: (Module, ?namespace) -> String
+		end
+	end
+end

@@ -15,6 +15,29 @@ module Magic
 		module Namespaces
 			attr_writer :namespaces
 
+			class << self
+				private
+
+				def with_namespaces method_name
+					returns = if method_name.end_with? '?' # boolean
+						:any?
+					else
+						:first
+					end
+
+					define_method method_name do |object_class, *namespaces|
+						return super object_class, *namespaces unless
+								namespaces.empty?
+
+						self.namespaces
+								.reverse # recently added first
+								.lazy    # optimization
+								.filter_map { super object_class, it }
+								.instance_eval(&returns)
+					end
+				end
+			end
+
 			def namespaces = @namespaces ||
 					if superclass.respond_to? :namespaces
 						superclass.namespaces
@@ -22,15 +45,8 @@ module Magic
 						@namespaces = [ nil ]
 					end
 
-			def for object_class, *namespaces
-				return super unless namespaces.empty?
-
-				self.namespaces
-						.reverse # recently added first
-						.lazy    # optimization
-						.filter_map { super object_class, it }
-						.first
-			end
+			with_namespaces :for
+			with_namespaces :namespaced_name_for
 		end
 	end
 end

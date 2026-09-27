@@ -42,8 +42,7 @@ module Magic
 			object_class.ancestors
 					.lazy # optimization
 					.filter(&:name)
-					.map { name_for it }
-					.map { [ *namespace, it ] * '::' }
+					.map { namespaced_name_for it, namespace }
 					.filter_map(&:safe_constantize)
 					.grep(..self)
 					.first
@@ -52,5 +51,9 @@ module Magic
 		prepend Namespaces
 
 		def name_for(object_class) = raise NotImplementedError
+
+		def namespaced_name_for object_class, namespace = nil
+			[ *namespace, name_for(object_class) ] * '::'
+		end
 	end
 end

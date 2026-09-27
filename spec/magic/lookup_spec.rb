@@ -4,19 +4,13 @@
 #
 # rubocop:disable Layout/SpaceBeforeFirstArg
 
+require 'support/scope'
+
 module Magic
 	RSpec.describe Lookup do
 		subject { base_class }
 
-		let :base_class do
-			mixin = described_class
-
-			Class.new do
-				extend mixin
-
-				def self.name_for(object_class) = "#{object_class}Scope"
-			end
-		end
+		let(:base_class) { Class.new DummyScope }
 
 		describe '.for' do
 			before do
@@ -34,7 +28,7 @@ module Magic
 			end
 
 			context 'without `.name_for` explicitly defined' do
-				let(:base_class) { Class.new.tap { it.extend described_class } }
+				let(:base_class) { AbstractScope }
 
 				it { expect { subject[Array] }.to raise_error NotImplementedError }
 			end

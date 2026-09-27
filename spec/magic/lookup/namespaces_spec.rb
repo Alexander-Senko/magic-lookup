@@ -8,18 +8,14 @@
 #
 # rubocop:disable Layout/MultilineMethodCallIndentation
 
+require 'support/scope'
+
 module Magic
 	module Lookup
 		RSpec.describe Namespaces do
 			subject { base_class }
 
-			let :base_class do
-				Class.new do
-					extend Lookup
-
-					def self.name_for(object_class) = "#{object_class}Scope"
-				end
-			end
+			let(:base_class) { Class.new DummyScope }
 
 			it { is_expected.to be { it < described_class } }
 

@@ -1,25 +1,21 @@
 # frozen_string_literal: true
 
-class Scope
-	extend Magic::Lookup
-
-	def self.name_for(object_class) = "#{object_class}Scope"
-end
+require 'support/scope'
 
 module Magic
 	module Lookup
 		RSpec.describe Error do
 			describe '.for' do
-				its_result [], Scope do
+				its_result [], DummyScope do
 					is_expected.to be_instance_of described_class
 				end
 
-				its_result [], Scope do
+				its_result [], DummyScope do
 					is_expected.to be_a StandardError
 				end
 
-				its_result [], Scope do
-					is_expected.to have_attributes to_s: /no Scope found/,
+				its_result [], DummyScope do
+					is_expected.to have_attributes to_s: /no DummyScope found/,
 							name: 'ArrayScope', receiver: []
 				end
 			end

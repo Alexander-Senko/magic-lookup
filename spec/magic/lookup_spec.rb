@@ -143,5 +143,139 @@ module Magic
 				end
 			end
 		end
+
+		describe '.match?' do
+			subject { ArrayScope }
+
+			before { stub_const 'ArrayScope', Class.new(base_class) }
+
+			its_result(Array) { is_expected.to be true }
+
+			context 'when called on a base class' do
+				subject { base_class }
+
+				its_result(Array) { is_expected.to be false }
+			end
+
+			context 'when the name doesn’t match' do
+				subject { stub_const 'EnumeratorScope', Class.new(ArrayScope) }
+
+				its_result(Array) { is_expected.to be false }
+			end
+
+			describe 'inheritance' do
+				subject { stub_const 'EnumerableScope', Class.new(base_class) }
+
+				its_result(Array) { is_expected.to be true }
+
+				context 'with several matches' do
+					subject { stub_const 'ArrayScope', Class.new(parent_class) }
+
+					context 'when siblings' do
+						let(:parent_class) { base_class }
+
+						its_result(Array) { is_expected.to be true }
+					end
+
+					context 'when inherited' do
+						let(:parent_class) { stub_const 'EnumerableScope', Class.new(base_class) }
+
+						its_result(Array) { is_expected.to be true }
+					end
+				end
+			end
+
+			describe 'namespaces' do
+				subject { stub_const 'Namespace::ArrayScope', Class.new(base_class) }
+
+				its_result(Array, 'Namespace') { is_expected.to be true }
+
+				context 'when target class is namespaced' do
+					context 'when matching class is of the same namespace' do
+						subject { stub_const 'Enumerator::LazyScope', Class.new(base_class) }
+
+						its_result(Enumerator::Lazy) { is_expected.to be true }
+					end
+
+					context 'when matching class is of another namespace' do
+						subject { stub_const 'EnumeratorScope', Class.new(base_class) }
+
+						its_result(Enumerator::Lazy) { is_expected.to be true }
+					end
+				end
+
+				context 'when matching classes are namespaced' do
+					subject { stub_const 'Scope::Array', Class.new(base_class) }
+
+					before { def base_class.name_for(object_class) = "Scope::#{object_class}" }
+
+					its_result(Array) { is_expected.to be true }
+
+					context 'when target class is namespaced' do
+						context 'when matching class is of the same namespace' do
+							subject { stub_const 'Scope::Enumerator::Lazy', Class.new(base_class) }
+
+							its_result(Enumerator::Lazy) { is_expected.to be true }
+						end
+
+						context 'when matching class is of another namespace' do
+							subject { stub_const 'Scope::Enumerator', Class.new(base_class) }
+
+							its_result(Enumerator::Lazy) { is_expected.to be true }
+						end
+					end
+				end
+			end
+		end
+
+		describe '.name_match?' do
+			subject { ArrayScope }
+
+			before { stub_const 'ArrayScope', Class.new(base_class) }
+
+			its_result(Array) { is_expected.to be true }
+
+			context 'when called on a base class' do
+				subject { base_class }
+
+				its_result(Array) { is_expected.to be false }
+			end
+
+			context 'when the name doesn’t match' do
+				subject { stub_const 'EnumerableScope', Class.new(ArrayScope) }
+
+				its_result(Array) { is_expected.to be false }
+			end
+
+			describe 'namespaces' do
+				subject { stub_const 'Namespace::ArrayScope', Class.new(base_class) }
+
+				its_result(Array, 'Namespace') { is_expected.to be true }
+
+				context 'when target class is namespaced' do
+					context 'when matching class is of the same namespace' do
+						subject { stub_const 'Enumerator::LazyScope', Class.new(base_class) }
+
+						its_result(Enumerator::Lazy) { is_expected.to be true }
+					end
+				end
+
+				context 'when matching classes are namespaced' do
+					subject { stub_const 'Scope::Array', Class.new(base_class) }
+
+					before { def base_class.name_for(object_class) = "Scope::#{object_class}" }
+
+					its_result(Array) { is_expected.to be true }
+
+					context 'when target class is namespaced' do
+						context 'when matching class is of the same namespace' do
+							subject { stub_const 'Scope::Enumerator::Lazy', Class.new(base_class) }
+
+							its_result(Enumerator::Lazy) { is_expected.to be true }
+						end
+					end
+				end
+			end
+		end
 	end
 end

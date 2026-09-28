@@ -76,6 +76,33 @@ scope_class = Scope.for(object.class) or
 > [!NOTE]
 > `Magic::Lookup::Error` is never raised internally and is meant to be used in your code that implements the lookup logic.
 
+### Reverse lookup
+
+These are additional steps to set up a reverse inference:
+
+1. Define a base module including `Magic::Lookup::Scope`.
+2. Include the base module in the classes to be looked up.
+
+```ruby
+module Scopable
+  include Magic::Lookup::Scope
+end
+
+class Model
+  include Scopable
+end
+
+class MyModel < Model
+end
+
+Scopable.for MyScope    # => MyModel
+Scopable.for OtherScope # => nil
+```
+
+> [!IMPORTANT]
+> Magic Lookup doesn’t try to autoload any classes, it searches among already loaded ones instead.
+> Thus, one should preload all classes that need to be accessible via the reverse lookup.
+
 ## 🔮 Magic
 
 ### Inheritance

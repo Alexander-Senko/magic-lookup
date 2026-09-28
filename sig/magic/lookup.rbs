@@ -8,5 +8,7 @@ module Magic
 		def                 for: (Module, ?namespace) -> Class?
 		def            name_for: (Module)             -> String
 		def namespaced_name_for: (Module, ?namespace) -> String
+		def              match?: (Module, ?namespace) -> bool
+		def         name_match?: (Module, ?namespace) -> bool
 	end
 end

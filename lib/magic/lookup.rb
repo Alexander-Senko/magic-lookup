@@ -35,6 +35,7 @@ module Magic
 	module Lookup
 		autoload :Error,      'magic/lookup/error'
 		autoload :Namespaces, 'magic/lookup/namespaces'
+		autoload :Scope,      'magic/lookup/scope'
 
 		include Memery
 
@@ -54,6 +55,16 @@ module Magic
 
 		def namespaced_name_for object_class, namespace = nil
 			[ *namespace, name_for(object_class) ] * '::'
+		end
+
+		def match?(...)
+			self.for(...) == self
+		end
+
+		alias_method :=~, :match?
+
+		def name_match?(...)
+			namespaced_name_for(...) == name
 		end
 	end
 end

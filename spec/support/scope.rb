@@ -14,3 +14,10 @@ class NamespacedScope < DummyScope
 			Namespace
 	]
 end
+
+class  UserScope < DummyScope; end
+class AdminScope < DummyScope; end
+
+class GenericScope < DummyScope
+	def self.name_for(...) = to_s
+end

@@ -47,6 +47,8 @@ module Magic
 
 			with_namespaces :for
 			with_namespaces :namespaced_name_for
+			with_namespaces :match?
+			with_namespaces :name_match?
 		end
 	end
 end

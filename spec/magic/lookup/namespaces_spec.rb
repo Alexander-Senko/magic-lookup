@@ -92,6 +92,86 @@ module Magic
 					end
 				end
 			end
+
+			describe '.match?' do
+				before { stub_const            'ArrayScope', Class.new(base_class) }
+				before { stub_const 'Namespace::ArrayScope', Class.new(base_class) }
+
+				context 'with configured namespaces' do
+					subject { Namespace::ArrayScope }
+
+					before { receiver.namespaces += [ Namespace ] }
+
+					its_result(Array) { is_expected.to be true }
+
+					context 'with an explicit namespace' do
+						subject { ArrayScope }
+
+						its_result(Array, nil) { is_expected.to be true }
+					end
+
+					it 'isn’t cached' do
+						expect { receiver.namespaces -= [ Namespace ] }
+								.to change { subject[Array] }
+										.from(true)
+										.to   false
+					end
+
+					context 'without matching scopes in the namespace' do
+						subject { ArrayScope }
+
+						before { receiver.namespaces = [ 'OtherNamespace' ] }
+
+						its_result(Array) { is_expected.to be false }
+
+						context 'with a fallback' do
+							before { receiver.namespaces = [ nil, 'OtherNamespace' ] }
+
+							its_result(Array) { is_expected.to be true }
+						end
+					end
+				end
+			end
+
+			describe '.name_match?' do
+				before { stub_const            'ArrayScope', Class.new(base_class) }
+				before { stub_const 'Namespace::ArrayScope', Class.new(base_class) }
+
+				context 'with configured namespaces' do
+					subject { Namespace::ArrayScope }
+
+					before { receiver.namespaces += [ Namespace ] }
+
+					its_result(Array) { is_expected.to be true }
+
+					context 'with an explicit namespace' do
+						subject { ArrayScope }
+
+						its_result(Array, nil) { is_expected.to be true }
+					end
+
+					it 'isn’t cached' do
+						expect { receiver.namespaces -= [ Namespace ] }
+								.to change { subject[Array] }
+										.from(true)
+										.to   false
+					end
+
+					context 'without matching scopes in the namespace' do
+						subject { ArrayScope }
+
+						before { receiver.namespaces = [ 'OtherNamespace' ] }
+
+						its_result(Array) { is_expected.to be false }
+
+						context 'with a fallback' do
+							before { receiver.namespaces = [ nil, 'OtherNamespace' ] }
+
+							its_result(Array) { is_expected.to be true }
+						end
+					end
+				end
+			end
 		end
 	end
 end

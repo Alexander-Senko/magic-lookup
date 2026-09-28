@@ -1,0 +1,11 @@
+module Magic
+	module Lookup
+		module Scope
+			module ClassMethods
+				def for: (Module) -> Class
+
+				def classes: -> Array[Class]
+			end
+		end
+	end
+end

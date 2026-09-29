@@ -38,7 +38,6 @@ jobs:
 
       - name: Lint code for consistent style
         run: bin/rubocop -f github
-        continue-on-error: true
 
   test:
     runs-on: ubuntu-latest

@@ -26,11 +26,11 @@ So, meet
 
 # 🔮 Magic Lookup
 
-It’s meant to be _The One to Rule Them All_ — the library to provide a generic name-based lookup for a plenty of cases.
+It is meant to be _The One to Rule Them All_ — the library to provide a generic name-based lookup for a plenty of cases.
 
 ## Installation
 
-Install the gem and add to the application's Gemfile by executing:
+Install the gem and add to the application’s Gemfile by executing:
 
     $ bundle add magic-lookup
 
@@ -130,7 +130,7 @@ Scope.for MyModel               # => MyNamespace::MyScope
 > [!TIP]
 > Until a comprehensive documentation on all the use cases is released, the spec is recommended as further reading.
 > One can access it by running `rake` in the gem directory.
-> The output is quite descriptive to get familiar with the use cases.
+> The output is descriptive enough to get familiar with the use cases.
 
 ## Development
 
@@ -148,4 +148,4 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## Code of Conduct
 
-Everyone interacting in the Magic Lookup project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/Alexander-Senko/magic-lookup/blob/main/CODE_OF_CONDUCT.md).
+Everyone interacting in the Magic Lookup project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/Alexander-Senko/magic-lookup/blob/main/CODE_OF_CONDUCT.md).

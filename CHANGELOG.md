@@ -14,6 +14,8 @@ This release marks the gem to be stable enough.
 - Rails support (optional, not a dependency):
   - Ported `Magic.eager_load` from Magic Presenter
     to eagerly load different class scopes, be them presenters, models or whatever else.
+  - `Magic::Lookup::Scope.[]`
+    for the scoped classes to be available for reverse lookup in development environment.
 
 #### Reverse lookup
 

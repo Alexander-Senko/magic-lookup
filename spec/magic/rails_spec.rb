@@ -2,9 +2,31 @@
 
 require 'rails_helper'
 require 'magic/rails'
+require 'magic/lookup/rails'
 
 module Magic
 	RSpec.describe 'Rails integration' do
+		describe Lookup::Scope do
+			subject { base_module }
+
+			let :base_module do
+				Module.new.tap do
+					it.include described_class[:my_scope]
+				end
+			end
+
+			describe '.classes' do
+				before { allow(Magic).to receive :eager_load }
+
+				it 'eagerly loads the scope' do
+					subject.call
+
+					expect(Magic).to have_received(:eager_load)
+							.with :my_scope
+				end
+			end
+		end
+
 		describe 'helpers' do
 			subject { Magic }
 

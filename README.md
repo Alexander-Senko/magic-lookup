@@ -103,6 +103,17 @@ Scopable.for OtherScope # => nil
 > Magic Lookup doesn’t try to autoload any classes, it searches among already loaded ones instead.
 > Thus, one should preload all classes that need to be accessible via the reverse lookup.
 
+#### Rails
+
+You can mark a directory under `app` for eager loading.
+E. g., this will ensure that all the classes under `app/models` are available for reverse lookup in development environment:
+
+```ruby
+module Scopable
+  include Magic::Lookup::Scope[:models]
+end
+```
+
 ## 🔮 Magic
 
 ### Inheritance

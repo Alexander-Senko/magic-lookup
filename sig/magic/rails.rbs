@@ -1,3 +1,9 @@
 module Magic
+	module Lookup
+		module Scope
+			def self.[]: (interned scope) -> Module
+		end
+	end
+
 	def self.eager_load: (*interned scopes, ?engine: Rails::Engine) -> Array[Pathname]?
 end

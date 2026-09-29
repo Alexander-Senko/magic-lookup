@@ -1,7 +1,7 @@
 module Magic
 	module Lookup
-		class Error < NameError
-			def self.for: (any) -> Error
+		class Error[Receiver = untyped] < NameError[Receiver]
+			def self.for: [T] (T object, (Class | Module) lookup_class) -> Error[T]
 		end
 	end
 end

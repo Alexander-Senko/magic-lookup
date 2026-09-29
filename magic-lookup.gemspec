@@ -6,9 +6,9 @@ require_relative 'lib/magic/lookup/authors'
 Gem::Specification.new do |spec|
 	spec.name        = 'magic-lookup'
 	spec.version     = Magic::Lookup::VERSION
-	spec.authors     = Magic::Lookup::AUTHORS.names
-	spec.email       = Magic::Lookup::AUTHORS.emails
-	spec.homepage    = "#{Magic::Lookup::AUTHORS.github_url}/#{spec.name}"
+	spec.authors     = Magic::Lookup::Author.names
+	spec.email       = Magic::Lookup::Author.emails
+	spec.homepage    = "#{Magic::Lookup::Author.github_url}/#{spec.name}"
 	spec.summary     = 'Related class inference with some magic involved'
 	spec.description = 'Find a related class for an object (ex., a decorator, a presenter, a controller, or whatever).'
 	spec.license     = 'MIT'

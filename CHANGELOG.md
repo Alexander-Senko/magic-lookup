@@ -1,4 +1,4 @@
-## [1.0.0] — UNRELEASED
+## [1.0.0] — 2026-09-29
 
 This release marks the gem to be stable enough.
 

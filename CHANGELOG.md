@@ -1,3 +1,11 @@
+## [1.0.1] — 2026-10-05
+
+### Fixed
+
+- `Magic::Lookup::Scope` inheritance:
+  reverse lookup methods are meant for scope modules only, not for classes including them.
+
+
 ## [1.0.0] — 2026-09-29
 
 This release marks the gem to be stable enough.

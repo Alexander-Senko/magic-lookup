@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'active_support/concern'
 require 'magic/rails'
 require 'memery'
 
@@ -19,23 +18,26 @@ module Magic
 
 				memoize def [] scope
 					Module.new do
-						extend ActiveSupport::Concern
+						@scope = scope
 
-						include Scope
+						def self.included base
+							return if base.is_a? Class # modules only
 
-						included do
-							extend ClassMethods # WTF?!
+							base.include Scope
+							base.extend  Rails::ModuleFunctions
 
-							@loading_scope = scope
+							base.instance_variable_set :@loading_scope, @scope
 						end
+					end
+				end
+			end
 
-						class_methods do # public API
-							def classes
-								Magic.eager_load @loading_scope
+			module Rails
+				module ModuleFunctions # :nodoc:
+					def classes
+						Magic.eager_load @loading_scope
 
-								super
-							end
-						end
+						super
 					end
 				end
 			end

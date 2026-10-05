@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'active_support/concern'
 require 'active_support/core_ext/enumerable'
 require 'active_support/core_ext/object/blank'
 
@@ -29,9 +28,13 @@ module Magic
 		#     Scopable.for MyScope    # => MyModel
 		#     Scopable.for OtherScope # => nil
 		module Scope
-			extend ActiveSupport::Concern
+			def self.included base
+				return if base.is_a? Class # modules only
 
-			class_methods do
+				base.extend ModuleFunctions
+			end
+
+			module ModuleFunctions # :nodoc:
 				include Memery
 
 				memoize def for lookup_class
